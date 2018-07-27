@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- This is development version. For production I should change it for another-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ message }}
+    </div>
+    <div id="cost">
+        <p> {{ id }}.  {{ category }} {{ value }} {{ comment }}
+    </div>
+
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: "Hello Niks!"
+            }
+        });
+
+        var cost = new Vue({
+            el: '#cost',
+            data: {
+                id : 1,
+                value: 100,
+                category: "food",
+                comment:  "shop"
+            }
+        })
+    </script>
+
+</body>
+</html>
