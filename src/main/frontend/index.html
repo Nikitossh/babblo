@@ -8,31 +8,24 @@
 </head>
 <body>
     <div id="app">
-        <p>{{ message }}
-    </div>
-    <div id="cost">
-        <p> {{ id }}.  {{ category }} {{ value }} {{ comment }}
-    </div>
 
+    </div>
 
     <script>
         var app = new Vue({
             el: '#app',
             data: {
-                message: "Hello Niks!"
-            }
+                costs: [],
+            },
+            mounted() {
+                fetch("http://localhost:8080/")
+                    .then(response => response.json())
+                    .then((data) => {
+                    this.costs = costs;
+            })
+            },
+            template: '<div><li v-for="cost in costs">cost.id</li></div>'
         });
-
-        var cost = new Vue({
-            el: '#cost',
-            data: {
-                id : 1,
-                value: 100,
-                category: "food",
-                comment:  "shop"
-            }
-        })
     </script>
-
 </body>
 </html>
