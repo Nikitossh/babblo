@@ -12,7 +12,6 @@ import java.util.List;
 public class CostsRep {
     private static SessionFactory sessionFactory;
 
-
     public static List getCosts() {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure() // configures settings from hibernate.cfg.xml
@@ -20,18 +19,15 @@ public class CostsRep {
         try {
             sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         } catch (Exception e) {
-            // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
-            // so destroy it manually.
             StandardServiceRegistryBuilder.destroy(registry);
         }
     Session session = sessionFactory.openSession();
     Query query = session.createQuery(
             "select c " +
-                    "from costs c " +
-                    "where c.comment like :comment")
-            .setParameter("comment", "s%");
+                    "from costs c ");
+//                    "where c.comment like :comment")
+//            .setParameter("comment", "s%");
         session.beginTransaction();
-        List result = query.list();
-        return result;
+        return query.list();
     }
 }
