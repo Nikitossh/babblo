@@ -4,27 +4,28 @@
     <meta charset="UTF-8">
     <!-- This is development version. For production I should change it for another-->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Title</title>
 </head>
 <body>
     <div id="app">
-
+        <ol>
+        <li v-for="result in results.data">
+            {{result.category.category}} {{result.value}} {{result.comment}} {{result.date.date}}
+        </li>
+        </ol>
     </div>
 
     <script>
         var app = new Vue({
             el: '#app',
             data: {
-                costs: [],
+                results: [
+                ]
             },
             mounted() {
-                fetch("http://localhost:8080/")
-                    .then(response => response.json())
-                    .then((data) => {
-                    this.costs = costs;
-            })
-            },
-            template: '<div><li v-for="cost in costs">cost.id</li></div>'
+                axios.get("http://localhost:8080/").then(response => this.results = response);
+                }
         });
     </script>
 </body>
