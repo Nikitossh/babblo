@@ -1,6 +1,5 @@
 package com.shesterikov.babblo.controller;
 
-import com.shesterikov.babblo.model.Cost;
 import com.shesterikov.babblo.persistent.CostRepository;
 import com.shesterikov.babblo.persistent.CostsRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,10 @@ public class HelloController {
 
     @CrossOrigin(origins = "http://localhost:8080")
     @RequestMapping("/")
-    public @ResponseBody List<Cost> index() {
+    public @ResponseBody
+    List index() {
         return costRepository.findBy();
+//        return costRepository.fiii();
     }
 
 }

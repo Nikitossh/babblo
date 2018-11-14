@@ -9,11 +9,12 @@
 </head>
 <body>
     <div id="app">
-        <ol>
+        <ul>
         <li v-for="result in results.data">
-            {{result.category.category}} {{result.value}} {{result.comment}} {{result.date.date}}
+            {{result.id}} {{result.category.category}} {{result.value}} {{result.comment}} {{result.date.date}}
+
         </li>
-        </ol>
+        </ul>
     </div>
 
     <script>

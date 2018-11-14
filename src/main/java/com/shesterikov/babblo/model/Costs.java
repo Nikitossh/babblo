@@ -3,9 +3,9 @@ package com.shesterikov.babblo.model;
 import java.util.ArrayList;
 
 public class Costs {
-    private ArrayList<AbstractCost> costs;
+    private ArrayList<Cost> costs;
 
-    public ArrayList<AbstractCost> getCostsList() {
+    public ArrayList<Cost> getCostsList() {
         costs = new ArrayList<>();
         // Calling method filling this list with required costs from DB
         return costs;

@@ -13,8 +13,6 @@ import org.junit.jupiter.api.BeforeAll;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 class CostTest {
     private static SessionFactory sessionFactory;
 
@@ -45,7 +43,7 @@ class CostTest {
     void testBasicUsage() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        // Name "costs" in database with lowercase must be the the same there
+        // Name "costs" in database with lowercase must be the same there
         List result = session.createQuery("from costs ").list();
         for (Cost cost : (List<Cost>) result) {
             System.out.println(cost.getId() + " " + cost.getValue() + " " + cost.getCategory() + " " + cost.getComment());

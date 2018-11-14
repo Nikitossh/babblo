@@ -10,13 +10,12 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class CostsRepositoryImpl implements CostRepository{
-    private static SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory = createFactory();
 
-    public List<Cost> findBy() {
+    private static SessionFactory createFactory() {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure() // configures settings from hibernate.cfg.xml
                 .build();
@@ -25,66 +24,19 @@ public class CostsRepositoryImpl implements CostRepository{
         } catch (Exception e) {
             StandardServiceRegistryBuilder.destroy(registry);
         }
-    Session session = sessionFactory.openSession();
-    Query query = session.createQuery(
-            "select c " +
-                    "from costs c ");
+        return sessionFactory;
+    }
+
+
+    public List findBy() {
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
-        return query.list();
+        Query query = session.createQuery("from costs where id< :id and category.category=:cat" );
+        query.setParameter("id", (long) 22);
+        query.setParameter("cat", "food");
+        session.getTransaction().commit();
+
+    return query.list();
     }
 
-    @Override
-    public <S extends Cost> S save(S s) {
-        return null;
-    }
-
-    @Override
-    public <S extends Cost> Iterable<S> saveAll(Iterable<S> iterable) {
-        return null;
-    }
-
-    @Override
-    public Optional<Cost> findById(Long aLong) {
-        return Optional.empty();
-    }
-
-    @Override
-    public boolean existsById(Long aLong) {
-        return false;
-    }
-
-    @Override
-    public Iterable<Cost> findAll() {
-        return null;
-    }
-
-    @Override
-    public Iterable<Cost> findAllById(Iterable<Long> iterable) {
-        return null;
-    }
-
-    @Override
-    public long count() {
-        return 0;
-    }
-
-    @Override
-    public void deleteById(Long aLong) {
-
-    }
-
-    @Override
-    public void delete(Cost cost) {
-
-    }
-
-    @Override
-    public void deleteAll(Iterable<? extends Cost> iterable) {
-
-    }
-
-    @Override
-    public void deleteAll() {
-
-    }
 }
