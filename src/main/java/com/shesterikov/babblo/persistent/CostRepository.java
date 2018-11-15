@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface CostRepository {
-    List findBy();
-
+    List findAll();
+    List findByCategory(String category);
 }

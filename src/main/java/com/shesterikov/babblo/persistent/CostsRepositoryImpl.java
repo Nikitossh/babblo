@@ -1,6 +1,5 @@
 package com.shesterikov.babblo.persistent;
 
-import com.shesterikov.babblo.model.Cost;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -27,16 +26,23 @@ public class CostsRepositoryImpl implements CostRepository{
         return sessionFactory;
     }
 
-
-    public List findBy() {
+    public List findAll() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query query = session.createQuery("from costs where id< :id and category.category=:cat" );
-        query.setParameter("id", (long) 22);
-        query.setParameter("cat", "food");
+        Query query = session.createQuery("from costs where id>0" );
         session.getTransaction().commit();
 
-    return query.list();
+        return query.list();
+    }
+
+    public List findByCategory(String category) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from costs where category.category = :category");
+        query.setParameter("category", category);
+        session.getTransaction().commit();
+
+        return query.list();
     }
 
 }
