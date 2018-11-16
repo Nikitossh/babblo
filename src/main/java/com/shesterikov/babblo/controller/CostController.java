@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
-public class HelloController {
+public class CostController {
     @Autowired
     CostRepository costRepository = new CostsRepositoryImpl();
 
@@ -21,7 +21,7 @@ public class HelloController {
 
     @RequestMapping("/category")
     public @ResponseBody
-    List category(@RequestParam(value = "category", defaultValue = "other") String category) {
+    List category(@RequestParam(value = "category", defaultValue = "") String category) {
         return costRepository.findByCategory(category);
     }
 

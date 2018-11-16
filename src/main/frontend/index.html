@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <!-- This is development version. For production I should change it for another-->
@@ -8,7 +8,11 @@
     <title>Title</title>
 </head>
 <body>
+
     <div id="app">
+        <p>Введите категорию: <input v-model="category">
+        <button type="button" @click="getData(category)">Применить</button>
+        </p>
         <ul>
         <li v-for="result in results.data">
             {{result.id}} {{result.category.category}} {{result.value}} {{result.comment}} {{result.date.date}}
@@ -22,12 +26,17 @@
             el: '#app',
             data: {
                 results: [
-                ]
+                ],
+                category: ""
             },
-            mounted() {
-                axios.get("http://localhost:8080/").then(response => this.results = response);
+            methods: {
+                getData: function (category) {
+                    axios.get("http://localhost:8080/category?category=" + category).then(response => this.results = response);
                 }
+            }
         });
+
+
     </script>
 </body>
 </html>
