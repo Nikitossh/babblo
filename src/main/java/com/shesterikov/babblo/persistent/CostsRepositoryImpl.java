@@ -45,4 +45,15 @@ public class CostsRepositoryImpl implements CostRepository{
         return query.list();
     }
 
+    @Override
+    public List findMonth(Integer month) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from costs where MONTH(date.date) = :month");
+        query.setParameter("month", month);
+        session.getTransaction().commit();
+
+        return query.list();
+    }
+
 }

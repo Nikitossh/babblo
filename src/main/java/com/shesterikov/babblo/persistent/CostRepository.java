@@ -8,4 +8,5 @@ import java.util.List;
 public interface CostRepository {
     List findAll();
     List findByCategory(String category);
+    List findMonth(Integer month);
 }

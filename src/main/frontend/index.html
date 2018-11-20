@@ -6,10 +6,28 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Title</title>
+    <style>
+        #app {
+            position: relative;
+        }
+        #month {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color:blanchedalmond;
+        }
+        #category {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #7a7a7a;
+        }
+    </style>
 </head>
 <body>
 
     <div id="app">
+        <div id="category">
         <p>Введите категорию: <input v-model="category">
         <button type="button" @click="getData(category)">Применить</button>
         </p>
@@ -19,6 +37,19 @@
 
         </li>
         </ul>
+        </div>
+
+        <div id="month">
+        <p>Введите месяц: <input v-model="month">
+            <button type="button" @click="getMonth(month)">Применить</button>
+        </p>
+        <ul>
+            <li v-for="result in results2.data">
+                {{result.id}} {{result.category.category}} {{result.value}} {{result.comment}} {{result.date.date}}
+
+            </li>
+        </ul>
+        </div>
     </div>
 
     <script>
@@ -27,11 +58,16 @@
             data: {
                 results: [
                 ],
+                results2: [
+                ],
                 category: ""
             },
             methods: {
                 getData: function (category) {
                     axios.get("http://localhost:8080/category?category=" + category).then(response => this.results = response);
+                },
+                getMonth: function(month) {
+                    axios.get("http://localhost:8080/month?month=" + month).then(response => this.results2 = response);
                 }
             }
         });
