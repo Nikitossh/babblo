@@ -49,11 +49,16 @@ public class CostsRepositoryImpl implements CostRepository{
     public List findMonth(Integer month) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query query = session.createQuery("from costs where MONTH(date.date) = :month");
+        Query query = session.createQuery("select category.category as c, sum(value) as s from costs where MONTH(date.date) = :month group by category.category");
         query.setParameter("month", month);
         session.getTransaction().commit();
 
         return query.list();
     }
 
+    public static void main(String[] args) {
+        CostsRepositoryImpl crim = new CostsRepositoryImpl();
+        List list = crim.findMonth(11);
+        System.out.println(list);
+    }
 }

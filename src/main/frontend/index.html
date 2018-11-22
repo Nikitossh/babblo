@@ -6,23 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Title</title>
-    <style>
-        #app {
-            position: relative;
-        }
-        #month {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color:blanchedalmond;
-        }
-        #category {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #7a7a7a;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -44,9 +28,8 @@
             <button type="button" @click="getMonth(month)">Применить</button>
         </p>
         <ul>
-            <li v-for="result in results2.data">
-                {{result.id}} {{result.category.category}} {{result.value}} {{result.comment}} {{result.date.date}}
-
+            <li v-for="result in month.data">
+                {{result[0]}} {{result[1]}}
             </li>
         </ul>
         </div>
@@ -58,16 +41,17 @@
             data: {
                 results: [
                 ],
-                results2: [
+                month: [
                 ],
-                category: ""
+                category: "",
+                sum: ""
             },
             methods: {
-                getData: function (category) {
+                getData: function(category) {
                     axios.get("http://localhost:8080/category?category=" + category).then(response => this.results = response);
                 },
                 getMonth: function(month) {
-                    axios.get("http://localhost:8080/month?month=" + month).then(response => this.results2 = response);
+                    axios.get("http://localhost:8080/month?month=" + month).then(response => this.month = response);
                 }
             }
         });

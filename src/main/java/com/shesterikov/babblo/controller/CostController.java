@@ -13,7 +13,6 @@ import static java.time.LocalDate.*;
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
 public class CostController {
-    final static LocalDate date = LocalDate.now();
 
     @Autowired
     CostRepository costRepository = new CostsRepositoryImpl();
