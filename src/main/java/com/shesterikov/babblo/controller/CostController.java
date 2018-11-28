@@ -1,40 +1,63 @@
 package com.shesterikov.babblo.controller;
 
+import com.shesterikov.babblo.model.Category;
 import com.shesterikov.babblo.model.Cost;
 import com.shesterikov.babblo.persistent.CostRepository;
-import com.shesterikov.babblo.persistent.CostsRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@RequestMapping("/api")
 public class CostController {
 
     @Autowired
-    CostRepository costRepository = new CostsRepositoryImpl();
+    CostRepository repository;
 
-    @RequestMapping("/")
-    public @ResponseBody
-    List index() {
-        return costRepository.findAll();
+    @GetMapping("/costs")
+    public List<Cost> getAllCosts() {
+        List<Cost> costs = new ArrayList<>();
+        repository.findAll().forEach(costs::add);
+
+        return costs;
     }
 
-    @RequestMapping("/category")
-    public @ResponseBody
-    List category(@RequestParam(value = "category", defaultValue = "") String category) {
-        return costRepository.findByCategory(category);
+    @PostMapping("cost")
+    public Cost postCost(@RequestBody Cost cost) {
+        Cost _cost = repository.save(new Cost(cost.getValue(), cost.getCategory(), cost.getComment(), cost.getDate()));
+        return _cost;
     }
 
-    @RequestMapping("/month")
-    public @ResponseBody
-    List month(@RequestParam(value = "month", defaultValue = "") Integer month) {
-        return costRepository.findMonth(month);
+    @DeleteMapping("cost/{id}")
+    public ResponseEntity<String> deleteCost(@PathVariable("id") long id) {
+        repository.deleteById(id);
+        return new ResponseEntity<>("Cost has been deleted!", HttpStatus.OK);
     }
-//
-//    @RequestMapping("/addcost")
-//    public @ResponseBody
-//    Cost insertCost(@RequestParam())
+
+    @GetMapping("/costs/category/{category}")
+    public List<Cost> findCostByCategory(@PathVariable Category category) {
+        List<Cost> costs = repository.findCostByCategory(category);
+        return costs;
+    }
+
+    @PutMapping("/cost/{id}")
+    public ResponseEntity<Cost> updateCost(@PathVariable("id") long id, @RequestBody Cost cost) {
+        Optional<Cost> costData = repository.findById(id);
+        if(costData.isPresent()) {
+            Cost _cost = costData.get();
+            _cost.setValue(cost.getValue());
+            _cost.setCategory(cost.getCategory());
+            _cost.setComment(cost.getComment());
+            _cost.setDate(cost.getDate());
+            return new ResponseEntity<>(repository.save(_cost), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
