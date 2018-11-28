@@ -1,5 +1,6 @@
 package com.shesterikov.babblo.persistent;
 
+import com.shesterikov.babblo.model.Cost;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -26,6 +27,7 @@ public class CostsRepositoryImpl implements CostRepository{
         return sessionFactory;
     }
 
+    // Find all costs in table and return as List
     public List findAll() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -35,6 +37,7 @@ public class CostsRepositoryImpl implements CostRepository{
         return query.list();
     }
 
+    // Find all entrees by one category and return as List
     public List findByCategory(String category) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -45,6 +48,8 @@ public class CostsRepositoryImpl implements CostRepository{
         return query.list();
     }
 
+    // Find entrees in selected ONE month and return List with only category and SUM(value)
+    //todo: In this method YEAR is hardcoded, think what to do with it
     @Override
     public List findMonth(Integer month) {
         Session session = sessionFactory.openSession();
@@ -60,9 +65,12 @@ public class CostsRepositoryImpl implements CostRepository{
         return query.list();
     }
 
-    public static void main(String[] args) {
-        CostsRepositoryImpl crim = new CostsRepositoryImpl();
-        List list = crim.findMonth(11);
-        System.out.println(list);
+    // Insert ONE cost to table
+    public void insertCost(Cost cost) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.save(cost);
+        session.getTransaction().commit();
     }
+
 }
