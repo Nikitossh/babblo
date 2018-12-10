@@ -11,7 +11,6 @@
             <label>Comment: </label> {{this.cost.comment}}
         </div>
 
-
         <span v-if="this.cost.id>1"
             v-on:click=""
             class="button is-small btn-primary">Inactive</span>
@@ -34,24 +33,9 @@
         name: "cost",
         props: ["cost"],
         methods: {
-            updateActive(value) {
-                var data = {
-                    id: this.cost.id,
-                    category: this.cost.category,
-                    value: this.cost.value,
-                    comment: this.cost.comment,
-                    data: this.cost.data.data
-                };
-
+            addCost() {
                 http
-                    .put("/cost/" + this.cost.id, data)
-                    .then(response => {
-                        this.cost.value = cost.value;
-                        console.log(response.data);
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    })
+                    .put()
             },
             deleteCost() {
                 http

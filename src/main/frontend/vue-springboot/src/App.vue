@@ -1,26 +1,35 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+  <div id="app" class="container-fluid">
+    <div class="site-info">
+      <h1>Babblo</h1>
+    </div>
+    <nav>
+      <router-link class="btn btn-primary" to="/">Costs</router-link>
+      <router-link class="btn btn-primary" to="/add">AddCost</router-link>
+      <router-link class="btn btn-primary" to="/search">Search costs</router-link>
+    </nav>
+    <br/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-
-export default {
-  name: 'app',
-  components: {
-
-  }
-}
+    export default {
+        name: "app"
+    };
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  .site-info {
+    color: blue;
+    margin-bottom: 20px;
+  }
+
+  .btn-primary {
+    margin-right: 50px;
+  }
+
+  .container-fluid {
+    text-align: center;
+  }
 </style>

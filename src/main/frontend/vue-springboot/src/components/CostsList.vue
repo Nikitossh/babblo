@@ -1,14 +1,14 @@
 <template>
-    <div class="list row">
+    <div class="list">
         <div class="col-md-6">
             <h4>Costs List</h4>
             <ul>
-                <li v-for="(cost, id) in costs" :key="index">
+                <li v-for="cost in costs" :key="cost.id">
                     <router-link :to="{
                             name: 'cost-details',
                             params: {cost: cost, id: cost.id}
                          }">
-                            {{cost.name}}">
+                            {{cost.id}} {{cost.value}} {{cost.category.category}} {{cost.date.date}}
 
                     </router-link>
                 </li>
@@ -55,7 +55,8 @@
 <style>
     .list {
         text-align: left;
-        max-width: 450px;
-        margin: auto;
+        margin-left: 200px;
+        /*max-width: 450px;*/
+        /*margin: auto;*/
     }
 </style>
