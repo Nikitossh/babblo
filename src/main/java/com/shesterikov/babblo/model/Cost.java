@@ -10,19 +10,19 @@ import javax.persistence.*;
 @Data
 public class Cost {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "value")
     private Long value;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Category category;
 
     @Basic(optional = false, fetch = FetchType.LAZY)
     private String comment;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Date date;
 
     public Cost() {}

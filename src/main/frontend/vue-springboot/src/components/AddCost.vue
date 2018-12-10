@@ -3,7 +3,7 @@
         <!--<div v-if="!submitted">-->
             <div class="form-group">
                 <label for="category">Category</label>
-                <input type="text" class="form-control" id="category" required v-model="cost.category.category" name="category">
+                <input type="text" class="form-control" id="category" required v-model="cost.category" name="category">
             </div>
 
             <div class="form-group">
@@ -14,6 +14,11 @@
             <div class="form-group">
                 <label for="comment">Comment</label>
                 <input type="text" class="form-control" id="comment" required v-model="cost.comment" name="comment">
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" id="date" required v-model="cost.date" name="date">
             </div>
 
         <button v-on:click="saveCost" class="btn btn-success">Submit cost</button>
@@ -32,7 +37,8 @@
                     id: 0,
                     value: 0,
                     category: "category",
-                    comment: "noComment"
+                    comment: "noComment",
+                    date: ""
                 },
                 submitted: false
             };
@@ -42,8 +48,9 @@
         saveCost() {
             var data = {
                 value: this.cost.value,
-                category: this.cost.category,
-                comment: this.cost.comment
+                category: this.cost.category.category,
+                comment: this.cost.comment,
+                date: this.cost.date.date
             };
             http
                 .post("/cost", data)
