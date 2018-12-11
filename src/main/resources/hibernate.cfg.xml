@@ -39,7 +39,7 @@
         <mapping class="com.shesterikov.babblo.model.Cost"/>
         <mapping class="com.shesterikov.babblo.model.Category"/>
         <!--<mapping class="system.entity.Budget"/>-->
-        <mapping class="com.shesterikov.babblo.model.Date"/>
+        <!--<mapping class="com.shesterikov.babblo.model.LocalDate"/>-->
 
     </session-factory>
 

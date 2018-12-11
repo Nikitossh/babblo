@@ -10,7 +10,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>com.shesterikov.babblo.model.Cost</class>
         <class>com.shesterikov.babblo.model.Category</class>
-        <class>com.shesterikov.babblo.model.Date</class>
+        <class>com.shesterikov.babblo.model.LocalDate</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

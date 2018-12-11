@@ -21,7 +21,7 @@
                 <input type="date" class="form-control" id="date" required v-model="cost.date" name="date">
             </div>
 
-        <button v-on:click="saveCost" class="btn btn-success">Submit cost</button>
+        <button v-on:click="saveCost" class="btn btn-success">Save cost</button>
         <!--</div>-->
     </div>
 </template>
@@ -36,7 +36,10 @@
                 cost: {
                     id: 0,
                     value: 0,
-                    category: "category",
+                    category: {
+                        id: 0,
+                        category: ""
+                    },
                     comment: "noComment",
                     date: ""
                 },
@@ -50,7 +53,7 @@
                 value: this.cost.value,
                 category: this.cost.category.category,
                 comment: this.cost.comment,
-                date: this.cost.date.date
+                date: this.cost.date
             };
             http
                 .post("/cost", data)

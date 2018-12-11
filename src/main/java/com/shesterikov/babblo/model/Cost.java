@@ -3,10 +3,11 @@ package com.shesterikov.babblo.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 
 @Entity(name = "costs")
-@Table(name = "costs")
+@Table(name = "newcosts")
 @Data
 public class Cost {
     @Id
@@ -22,12 +23,13 @@ public class Cost {
     @Basic(optional = false, fetch = FetchType.LAZY)
     private String comment;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    private Date date;
+//    @ManyToOne(cascade = {CascadeType.ALL})
+    @Column(name = "date")
+    private LocalDate date;
 
     public Cost() {}
 
-    public Cost(Long value, Category category, String comment, Date date) {
+    public Cost(Long value, Category category, String comment, LocalDate date) {
         this.value = value;
         this.category = category;
         this.comment = comment;
@@ -66,12 +68,12 @@ public class Cost {
         this.comment = comment;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(LocalDate localDate) {
+        this.date = localDate;
     }
 
     @Override
@@ -81,7 +83,7 @@ public class Cost {
                 ", value=" + value +
                 ", category=" + category +
                 ", comment='" + comment + '\'' +
-                ", date=" + date +
+                ", localDate=" + date +
                 '}';
     }
 }
