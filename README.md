@@ -1,2 +1,2 @@
 # babblo
-MyBabblo project on Spring, Hubernate and AngularJS
+MyBabblo project on Spring, Hibernate and VueJS
