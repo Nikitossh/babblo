@@ -8,10 +8,10 @@
             Persistence unit for create EntityManagerFactory for MyMoney App
         </description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>com.shesterikov.babblo.model.Cost</class>
-        <class>com.shesterikov.babblo.model.Category</class>
+        <class>com.shesterikoff.babblo.model.Cost</class>
+        <class>com.shesterikoff.babblo.model.Category</class>
         <!--<class>system.entity.Costs</class>-->
-        <class>com.shesterikov.babblo.model.Date</class>
+        <class>com.shesterikoff.babblo.model.Date</class>
         <!--<class>system.entity.Budget</class>-->
 
         <properties>
